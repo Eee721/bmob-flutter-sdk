@@ -85,6 +85,8 @@ abstract class BmobObject {
     Map responseData = await BmobDio.getInstance()
         .post(Bmob.BMOB_API_CLASSES + tableName, data: params);
     BmobSaved bmobSaved = BmobSaved.fromJson(responseData);
+    objectId = bmobSaved.objectId;
+    createdAt = bmobSaved.createdAt;
     return bmobSaved;
   }
 
@@ -104,6 +106,7 @@ abstract class BmobObject {
           Bmob.BMOB_API_CLASSES + tableName + Bmob.BMOB_API_SLASH + objectId,
           data: params);
       BmobUpdated bmobUpdated = BmobUpdated.fromJson(responseData);
+      updatedAt = bmobUpdated.updatedAt;
       return bmobUpdated;
     }
   }
@@ -144,6 +147,7 @@ abstract class BmobObject {
           Bmob.BMOB_API_CLASSES + tableName + Bmob.BMOB_API_SLASH + objectId,
           data: "$body");
       BmobUpdated bmobUpdated = BmobUpdated.fromJson(responseData);
+      updatedAt = bmobUpdated.updatedAt;
       return bmobUpdated;
     }
   }
